@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "miguelsaramago/train-schedule"
+        DOCKER_IMAGE_NAME = "willbla/train-schedule"
     }
     stages {
         stage('Build') {
@@ -42,7 +42,7 @@ pipeline {
             when {
                 branch 'master'
             }
-            enviroment{
+            environment { 
                 CANARY_REPLICAS = 1
             }
             steps {
@@ -57,8 +57,9 @@ pipeline {
             when {
                 branch 'master'
             }
-            enviroment{
+            environment { 
                 CANARY_REPLICAS = 0
+            }
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
